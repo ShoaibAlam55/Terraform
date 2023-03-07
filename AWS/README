@@ -1,0 +1,8 @@
+#install terraform on windows
+    Download Terraform. This article was tested using Terraform version 1.1.4.
+    From the download, extract the executable to a directory of your choosing (for example, c:\terraform).
+    Update your system's global path to the executable.
+    Open a terminal window.
+    Verify the global path configuration with the terraform command.
+
+#map accesskey and secret key of AWS to communicate  terraform with AWS

@@ -1,0 +1,8 @@
+1. Add secret key and access key
+    a. It can be static like in main.tf file
+    b. It can be set throught environmental variable
+    c. Through CLI aws/az CLI
+
+2. Terraform version . dependency lock might impact
+
+3. go through AWS resources and need to add required parameter in tf file

@@ -1,0 +1,48 @@
+1.File provisioner
+    File provisioner can be used for transferring and copying the files from one machine to another machine.
+    Not only file but it can also be used for transferring/uploading the directories
+    Supporting arguments for file provisioners
+        1. source - The source argument is used to specify the location from where you want to pick the file. The source location can be relative to your project structure.    
+        BASH
+            2. content - The content argument is useful when you do not want to copy or transfer the file instead you only want to copy the content or string.
+                provisioner "file" {
+                    content     = "I want to copy this string to the destination file server.txt"
+                    destination = "/home/ubuntu/server.txt"
+                }
+                BASH
+        The above provisioner script will copy the string I want to copy this string to the destination file server.txt to the destination file /home/ubuntu/server.txt
+
+        3. destination - As the name suggest you need to input the final destination path where you want your file to be.
+2.local-exec provisioner
+    This provisioner is used when you want to perform some tasks onto your local machine where you have installed the terraform.
+    So local-exec provisioner is never used to perform any kind task on the remote machine. It will always be used to perform local operations onto your local machine.x
+        1. command - This is a mandatory argument which you always need to pass along whenever you are implementing the local-exec provisioners.Always consider command as shell script executioner because whatever you pass in the command will be executed as a bash shell script.
+        You can write even mention the relative path of your shell script location and pass it the command.
+
+            provisioner "local-exec" {
+                command = "touch hello.txt"
+            }
+
+            2. working_dir -It is an optional argument which and you do not necessarily need to pass along with the command argument.
+            This is a supporting argument for the command because once you specify the working_dir you are explicitly telling terraform to execute the command at that particular location.
+            You can mention the relative path of the working_dir.
+
+
+            3. interpreter - With the help of interpreter you can explicitly specify in which environment(bash, PowerShell, perl etc.) you are going to execute the command.
+            It is an optional argument.
+            If you do not specify the interpreter argument the default will be taken into consideration based on the operating system.
+
+            4. environment - This is again an optional parameter that can be passed alongside the command argument.With the help of environment you can define or set environment variables that can be accessible later or inside your terraform execution.environment arguments are generally the key-value pair and you can define as many variables as you can.
+3.remote-exec provisioner
+        As the name suggests remote-exec it is always going to work on the remote machine. With the help of the remote-exec you can specify the commands of shell scripts that want to execute on the remote machine.
+        1. inline - With the help of an inline argument you can specify the multiple commands which you want to execute in an ordered fashion.
+            provisioner "remote-exec" {
+                inline = [
+                "touch hello.txt",
+                "echo helloworld remote provisioner >> hello.txt",
+                ]
+            }
+            2. script - It can be used to copy the script from local machine to remote machine and it always contains a relative path.
+            In the script, you can not specify multiple scripts. You can only mention one script which needs to be copied to the remote machine.
+            3. scripts - Here you can specify the multiple local scripts which want to copy or transfer to the remote machine and execute over there.
+            Always remember the order of the file will not change and it going to execute in the same order way you have mentioned.
